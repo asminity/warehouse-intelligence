@@ -2,6 +2,8 @@
 
 Artificial Intelligence – Group Coding Assignment · Group <!-- FILL IN: XX -->
 
+**Live demo:** https://warehouse-intelligence.onrender.com (free instance: the first visit after a quiet spell can take about a minute to wake up)
+
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/asminity/warehouse-intelligence)
 
 A simulated delivery robot plans routes on a 2D warehouse grid with **Breadth-First Search, Depth-First
