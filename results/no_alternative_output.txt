@@ -1,0 +1,111 @@
+
+==============================================================================
+ TASK 1 - WAREHOUSE 'no_alternative'  (5 x 10)
+==============================================================================
+  0 1 2 3 4 5 6 7 8 9
+0 S . . . # . . . . .
+1 . . . . # . . . . .
+2 . . . . T . . . . G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+Legend: S start  G destination  . normal(1)  ~ crowded(4)  # shelf  X restricted  T trolley  * route  : explored  R robot  ! detected trolley
+Start (0, 0)  Destination (2, 9)  Passable cells 46  Shelf/restricted cells 4  Crowded cells 0
+Moves: up/down/left/right. Entering a normal cell costs 1, a crowded cell costs 4.
+
+==============================================================================
+ TASK 3 - SEARCH ALGORITHMS (on the robot's known map)
+==============================================================================
+
+--- BFS ---
+Route: 11 moves, total cost 11, 38 nodes expanded
+  0 1 2 3 4 5 6 7 8 9
+0 S * * * # . . . . .
+1 . . . * # . . . . .
+2 . . . * * * * * * G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+--- DFS ---
+Route: 15 moves, total cost 15, 16 nodes expanded
+  0 1 2 3 4 5 6 7 8 9
+0 S * * * # * * * * *
+1 . . . * # * . . . *
+2 . . . * * * . . . G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+--- Greedy ---
+Route: 11 moves, total cost 11, 12 nodes expanded
+  0 1 2 3 4 5 6 7 8 9
+0 S * * * # . . . . .
+1 . . . * # . . . . .
+2 . . . * * * * * * G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+--- A* ---
+Route: 11 moves, total cost 11, 12 nodes expanded
+  0 1 2 3 4 5 6 7 8 9
+0 S * * * # . . . . .
+1 . . . * # . . . . .
+2 . . . * * * * * * G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+==============================================================================
+ TASK 5 - PERFORMANCE COMPARISON
+==============================================================================
+Algorithm  Goal reached  Moves  Total cost  Nodes expanded  Time (ms)
+---------  ------------  -----  ----------  --------------  ---------
+BFS        Yes           11     11          38              0.219    
+DFS        Yes           15     15          16              0.104    
+Greedy     Yes           11     11          12              0.084    
+A*         Yes           11     11          12              0.095    
+
+Time = median of 5 runs with event tracing off.
+
+- Fewest moves: BFS, Greedy, A* (11 moves).
+- Lowest total cost: BFS, Greedy, A* (cost 11).
+- Fewest nodes expanded: Greedy, A* (12 nodes).
+- The shortest route (11 moves) was also the cheapest (cost 11).
+
+==============================================================================
+ TASK 4 - TROLLEY DETECTION AND A* REPLANNING
+==============================================================================
+Physical trolley(s) at [(2, 4)] -- NOT on the robot's known map.
+Sensor: checks the next cell of the plan before every move.
+
+Original A* route on the known map:
+  11 moves, cost 11
+  0 1 2 3 4 5 6 7 8 9
+0 S * * * # . . . . .
+1 . . . * # . . . . .
+2 . . . * * * * * * G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+[Detection 1] step 5: TROLLEY DETECTED at (2, 4) while robot at (2, 3).
+  Robot stopped -> known map updated (cell marked impassable) -> A* replanning from CURRENT position (2, 3) to (2, 9)
+  REPLANNING FAILED: no alternative route exists. Robot remains stopped.
+  0 1 2 3 4 5 6 7 8 9
+0 S . . . # . . . . .
+1 . . . . # . . . . .
+2 . . . R ! . . . . G
+3 . . . . # . . . . .
+4 . . . . # . . . . .
+
+Outcome: Destination (2, 9) is unreachable: obstacle detected at (2, 4) and no alternative route exists from (2, 3). Robot stopped.
+Route actually travelled: (0, 0) -> (0, 1) -> (0, 2) -> (0, 3) -> (1, 3) -> (2, 3)
+
+Experiment    Goal reached  Moves  Total cost  Nodes expanded (all plans)  Replans
+------------  ------------  -----  ----------  --------------------------  -------
+A* (dynamic)  No            -      -           32                          1      
+
+Wrote figures:
+  screenshots\no_alternative_routes.png
+  screenshots\no_alternative_charts.png
+  screenshots\no_alternative_bfs.png
+  screenshots\no_alternative_dfs.png
+  screenshots\no_alternative_greedy.png
+  screenshots\no_alternative_astar.png
+  screenshots\no_alternative_trolley.png

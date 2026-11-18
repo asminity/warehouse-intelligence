@@ -1,0 +1,70 @@
+
+==============================================================================
+ TASK 1 - WAREHOUSE 'short_vs_cheap'  (3 x 4)
+==============================================================================
+  0 1 2 3
+0 S ~ ~ G
+1 . # # .
+2 . . . .
+Legend: S start  G destination  . normal(1)  ~ crowded(4)  # shelf  X restricted  T trolley  * route  : explored  R robot  ! detected trolley
+Start (0, 0)  Destination (0, 3)  Passable cells 10  Shelf/restricted cells 2  Crowded cells 2
+Moves: up/down/left/right. Entering a normal cell costs 1, a crowded cell costs 4.
+
+==============================================================================
+ TASK 3 - SEARCH ALGORITHMS (on the robot's known map)
+==============================================================================
+
+--- BFS ---
+Route: 3 moves, total cost 9, 6 nodes expanded
+  0 1 2 3
+0 S * * G
+1 . # # .
+2 . . . .
+
+--- DFS ---
+Route: 3 moves, total cost 9, 4 nodes expanded
+  0 1 2 3
+0 S * * G
+1 . # # .
+2 . . . .
+
+--- Greedy ---
+Route: 3 moves, total cost 9, 4 nodes expanded
+  0 1 2 3
+0 S * * G
+1 . # # .
+2 . . . .
+
+--- A* ---
+Route: 7 moves, total cost 7, 9 nodes expanded
+  0 1 2 3
+0 S ~ ~ G
+1 * # # *
+2 * * * *
+
+==============================================================================
+ TASK 5 - PERFORMANCE COMPARISON
+==============================================================================
+Algorithm  Goal reached  Moves  Total cost  Nodes expanded  Time (ms)
+---------  ------------  -----  ----------  --------------  ---------
+BFS        Yes           3      9           6               0.019    
+DFS        Yes           3      9           4               0.012    
+Greedy     Yes           3      9           4               0.013    
+A*         Yes           7      7           9               0.032    
+
+Time = median of 5 runs with event tracing off.
+
+- Fewest moves: BFS, DFS, Greedy (3 moves).
+- Lowest total cost: A* (cost 7).
+- Fewest nodes expanded: DFS, Greedy (4 nodes).
+- The shortest route was NOT the cheapest: the 3-move route costs 9, while the cheapest route takes 7 moves but costs only 7 (2 less). The extra moves avoid crowded cells (cost 4 each).
+
+(No trolley in this scenario. Add one with --trolley ROW,COL to run the replanning demo.)
+
+Wrote figures:
+  screenshots\short_vs_cheap_routes.png
+  screenshots\short_vs_cheap_charts.png
+  screenshots\short_vs_cheap_bfs.png
+  screenshots\short_vs_cheap_dfs.png
+  screenshots\short_vs_cheap_greedy.png
+  screenshots\short_vs_cheap_astar.png

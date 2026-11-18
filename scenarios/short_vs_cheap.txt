@@ -1,0 +1,5 @@
+; Minimal Task 3 test: a short crowded route (3 moves, cost 9)
+; versus a longer clear route (7 moves, cost 7).
+S~~G
+.##.
+....

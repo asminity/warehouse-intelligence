@@ -1,0 +1,5 @@
+Algorithm,Goal reached,Moves,Total cost,Nodes expanded,Time (ms),Max frontier
+BFS,Yes,23,56,120,0.356,10
+DFS,Yes,35,35,36,0.136,12
+Greedy,Yes,23,56,24,0.086,8
+A*,Yes,29,29,38,0.158,12

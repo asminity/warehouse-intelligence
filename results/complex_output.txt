@@ -1,0 +1,120 @@
+
+==============================================================================
+ TASK 1 - WAREHOUSE 'complex'  (12 x 20)
+==============================================================================
+                       1 1 1 1 1 1 1 1 1 1
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+ 0 S . # . . . . . . . # . . . . . . . . .
+ 1 . . # . # # # # . . # . # # # # # # # .
+ 2 . . # . # . . # . . # . # . . . . . # .
+ 3 . . # . # . . # ~ ~ # . # . # # # . # .
+ 4 . . . . # . . # . . . . # . # . # . # .
+ 5 . # # # # . . # # # # # # . # . # . # .
+ 6 . # ~ ~ . . . . . . . ~ ~ . # . # . . .
+ 7 . # . # # # # # # # . # # . # . # # # .
+ 8 . # . # X X X X X # . # . . # . . . # .
+ 9 . . . # X X X X X # . # . # # # # . # .
+10 . # # # . . . . . # . # . . . . . ~ # .
+11 . . . . . # # # . . . . . # # # . . # G
+Legend: S start  G destination  . normal(1)  ~ crowded(4)  # shelf  X restricted  T trolley  * route  : explored  R robot  ! detected trolley
+Start (0, 0)  Destination (11, 19)  Passable cells 137  Shelf/restricted cells 103  Crowded cells 7
+Moves: up/down/left/right. Entering a normal cell costs 1, a crowded cell costs 4.
+
+==============================================================================
+ TASK 3 - SEARCH ALGORITHMS (on the robot's known map)
+==============================================================================
+
+--- BFS ---
+Route: 44 moves, total cost 56, 137 nodes expanded
+                       1 1 1 1 1 1 1 1 1 1
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+ 0 S . # . . . . . . . # . . . . . . . . .
+ 1 * . # . # # # # . . # . # # # # # # # .
+ 2 * . # . # . . # . . # . # * * * * * # .
+ 3 * . # . # . . # ~ ~ # . # * # # # * # .
+ 4 * . . . # . . # . . . . # * # . # * # .
+ 5 * # # # # . . # # # # # # * # . # * # .
+ 6 * # * * * * * * * * * * * * # . # * * *
+ 7 * # * # # # # # # # . # # . # . # # # *
+ 8 * # * # X X X X X # . # . . # . . . # *
+ 9 * * * # X X X X X # . # . # # # # . # *
+10 . # # # . . . . . # . # . . . . . ~ # *
+11 . . . . . # # # . . . . . # # # . . # G
+
+--- DFS ---
+Route: 46 moves, total cost 49, 47 nodes expanded
+                       1 1 1 1 1 1 1 1 1 1
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+ 0 S * # * * * * * * * # * * * * * * * * *
+ 1 . * # * # # # # . * # * # # # # # # # *
+ 2 . * # * # . . # . * # * # . . . . . # *
+ 3 . * # * # . . # ~ * # * # . # # # . # *
+ 4 . * * * # . . # . * * * # . # . # . # *
+ 5 . # # # # . . # # # # # # . # . # . # *
+ 6 . # ~ ~ . . . . . . . ~ ~ . # . # . . *
+ 7 . # . # # # # # # # . # # . # . # # # *
+ 8 . # . # X X X X X # . # . . # . . . # *
+ 9 . . . # X X X X X # . # . # # # # . # *
+10 . # # # . . . . . # . # . . . . . ~ # *
+11 . . . . . # # # . . . . . # # # . . # G
+
+--- Greedy ---
+Route: 52 moves, total cost 52, 82 nodes expanded
+                       1 1 1 1 1 1 1 1 1 1
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+ 0 S * # . . . . . . . # . . . . . . . . .
+ 1 . * # . # # # # . . # . # # # # # # # .
+ 2 . * # . # . . # . . # . # * * * * * # .
+ 3 . * # . # . . # ~ ~ # . # * # # # * # .
+ 4 * * . . # . . # . . . . # * # . # * # .
+ 5 * # # # # . . # # # # # # * # . # * # .
+ 6 * # ~ ~ . . . . . . . ~ ~ * # . # * * *
+ 7 * # . # # # # # # # . # # * # . # # # *
+ 8 * # . # X X X X X # . # * * # . . . # *
+ 9 * . . # X X X X X # . # * # # # # . # *
+10 * # # # * * * * * # . # * . . . . ~ # *
+11 * * * * * # # # * * * * * # # # . . # G
+
+--- A* ---
+Route: 46 moves, total cost 49, 123 nodes expanded
+                       1 1 1 1 1 1 1 1 1 1
+   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
+ 0 S * # * * * * * * * # * * * * * * * * *
+ 1 . * # * # # # # . * # * # # # # # # # *
+ 2 . * # * # . . # . * # * # . . . . . # *
+ 3 . * # * # . . # ~ * # * # . # # # . # *
+ 4 . * * * # . . # . * * * # . # . # . # *
+ 5 . # # # # . . # # # # # # . # . # . # *
+ 6 . # ~ ~ . . . . . . . ~ ~ . # . # . . *
+ 7 . # . # # # # # # # . # # . # . # # # *
+ 8 . # . # X X X X X # . # . . # . . . # *
+ 9 . . . # X X X X X # . # . # # # # . # *
+10 . # # # . . . . . # . # . . . . . ~ # *
+11 . . . . . # # # . . . . . # # # . . # G
+
+==============================================================================
+ TASK 5 - PERFORMANCE COMPARISON
+==============================================================================
+Algorithm  Goal reached  Moves  Total cost  Nodes expanded  Time (ms)
+---------  ------------  -----  ----------  --------------  ---------
+BFS        Yes           44     56          137             0.564    
+DFS        Yes           46     49          47              0.232    
+Greedy     Yes           52     52          82              0.372    
+A*         Yes           46     49          123             0.598    
+
+Time = median of 5 runs with event tracing off.
+
+- Fewest moves: BFS (44 moves).
+- Lowest total cost: DFS, A* (cost 49).
+- Fewest nodes expanded: DFS (47 nodes).
+- The shortest route was NOT the cheapest: the 44-move route costs 56, while the cheapest route takes 46 moves but costs only 49 (7 less). The extra moves avoid crowded cells (cost 4 each).
+
+(No trolley in this scenario. Add one with --trolley ROW,COL to run the replanning demo.)
+
+Wrote figures:
+  screenshots\complex_routes.png
+  screenshots\complex_charts.png
+  screenshots\complex_bfs.png
+  screenshots\complex_dfs.png
+  screenshots\complex_greedy.png
+  screenshots\complex_astar.png

@@ -1,0 +1,10 @@
+[project]
+name = "ai-warehouse-pathplanning"
+version = "1.0.0"
+description = "AI route planning for a warehouse delivery robot: BFS, DFS, Greedy, A* and dynamic replanning"
+requires-python = ">=3.10"
+dependencies = ["numpy", "matplotlib"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

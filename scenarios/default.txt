@@ -1,0 +1,16 @@
+; Default demo warehouse: packing station S (west) -> dispatch area G (east).
+; The straight main aisle (row 6) is crowded (~ cost 4); quieter aisles are longer.
+; T = trolley: physically present but NOT on the robot's initial known map.
+XXXX....................
+X##...########..######..
+X##.#.########..######..
+....#......T............
+.##.#.###########.#####.
+.##.#.###########.#####.
+S.....~~~~~~~~~~~......G
+.######.#########.#####.
+.######.#########.#####.
+.........~~.............
+.######.######..#######.
+.######.######..#######.
+......XXXX..............

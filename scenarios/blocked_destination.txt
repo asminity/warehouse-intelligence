@@ -1,0 +1,6 @@
+; The dispatch area is sealed off by shelves and a restricted zone: no route exists.
+S...........
+.##.##.##...
+.........###
+.##.##.##XG#
+.........###
