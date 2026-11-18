@@ -2,6 +2,8 @@
 
 Artificial Intelligence – Group Coding Assignment · Group <!-- FILL IN: XX -->
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/asminity/warehouse-intelligence)
+
 A simulated delivery robot plans routes on a 2D warehouse grid with **Breadth-First Search, Depth-First
 Search, Greedy Best-First Search and A\***. It handles **weighted movement costs**. It also **detects an
 unexpected trolley** on its planned route and **replans with A\* from its current position**.
