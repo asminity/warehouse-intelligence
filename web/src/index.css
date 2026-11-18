@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --font-cond: "Barlow Semi Condensed", "Barlow", ui-sans-serif, sans-serif;
+
+  --color-bay: #0c121c;      /* viewport / deepest background */
+  --color-shell: #0f1621;    /* app chrome */
+  --color-panel: #141c28;    /* panels */
+  --color-raised: #1a2432;   /* inputs, hover */
+  --color-line: #233044;     /* hairlines */
+  --color-line-strong: #2f3e55;
+  --color-ink: #e4eaf2;
+  --color-soft: #b4c0cf;
+  --color-mute: #7d8ca1;
+  --color-amber: #f2a900;    /* safety amber: primary accent */
+  --color-route: #3ea6ff;    /* planned route */
+  --color-go: #2bc48a;       /* success */
+  --color-stop: #e5484d;     /* obstacle / failure */
+}
+
+:root {
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 1;
+  background: var(--color-shell);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root { height: 100%; margin: 0; }
+body { overflow: hidden; }
+
+:focus-visible { outline: 2px solid var(--color-amber); outline-offset: 2px; }
+
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+.panel-title {
+  font-family: var(--font-cond);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+}
+
+.num { font-family: var(--font-cond); font-variant-numeric: tabular-nums; }
+
+/* Labels rendered inside the 3D scene */
+.scene-label {
+  font: 600 12px/1 var(--font-cond);
+  padding: 5px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  background: rgba(12, 18, 28, 0.82);
+  border: 1px solid var(--color-line-strong);
+  color: var(--color-soft);
+  backdrop-filter: blur(4px);
+  transform: translateY(-4px);
+}
+.scene-label--start { border-left: 3px solid var(--color-go); color: var(--color-ink); }
+.scene-label--goal { border-left: 3px solid var(--color-amber); color: var(--color-ink); }
+.scene-label--warn { border-color: var(--color-stop); background: rgba(70, 14, 18, 0.9); color: #ffd9db; }
+.scene-label--muted { border-style: dashed; }
+
+/* Range input used by the timeline scrubber */
+.scrubber { -webkit-appearance: none; appearance: none; background: transparent; width: 100%; height: 22px; }
+.scrubber::-webkit-slider-runnable-track { height: 4px; background: var(--color-line-strong); border-radius: 2px; }
+.scrubber::-moz-range-track { height: 4px; background: var(--color-line-strong); border-radius: 2px; }
+.scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 2px;
+  background: var(--color-amber); border: 2px solid var(--color-shell);
+}
+.scrubber::-moz-range-thumb { width: 12px; height: 12px; border-radius: 2px; background: var(--color-amber); border: 2px solid var(--color-shell); }
+
+.scroll-thin { scrollbar-width: thin; scrollbar-color: var(--color-line-strong) transparent; }
+
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.toast-in { animation: toast-in 180ms ease-out; }
+
+@keyframes alert-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0.45); } 50% { box-shadow: 0 0 0 6px rgba(229, 72, 77, 0); } }
+.alert-pulse { animation: alert-pulse 1.2s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .toast-in, .alert-pulse { animation: none; }
+}
